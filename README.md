@@ -10,6 +10,7 @@ This project was made using Thonny for class with coding languages HTML, CSS, Ji
 3. The server should be running on http://127.0.0.1:8080
 
 Gameplay
+
 Read the tutorial then input the name of your student to start the game. 
 Once you start you should see the following sections:
   Display (Top Left) - Shows the date, the most recent event, and your character's name, hp, stats, and friends.
