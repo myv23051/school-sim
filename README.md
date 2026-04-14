@@ -3,7 +3,7 @@ Interactive school training simulator
 
 I no longer have the credits to host the website using Google run. You must host the flask app yourself.
 
-This project was made using Thonny for class with coding languages HTML, CSS, Jinja, and Python.
+This project was made using Thonny for class with coding languages HTML, CSS, Jinja, Python, and a little bit of JavaScript.
 
 1. Change your interpreter to this folder, it is a virtual environment.
 2. Run app-test.py, this is the flask app.
