@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vivian Mai</title>
+<style>
+	body, html{
+		background-color:SlateGrey;
+		height:100%
+		margin:0;
+		}
+	.outer {
+		padding:10px
+		heigh: 100vh;
+		}
+	.top-left {
+		background-color:White;
+		width:69%; 
+		height:65vh;
+		display:inline;
+		float:left;
+	}
+	.top-right {
+		background-color:White;
+		width:30%; height:65vh;
+		border-left: 3px solid black;
+		display:inline;
+		float:right;
+	}
+	.bot-left{
+		background-color:White;
+		width:69%; height:31vh;
+		border-top:3px solid black;
+		display:inline;
+		float:left;
+	}
+	.bot-right {
+		background-color:White;
+		width:30%; height:31vh;
+		border-left: 3px solid black;
+		border-top:3px solid black;
+		display:inline;
+		float:right;
+	}
+	.action-button{
+		margin: 5px 6% 2% 6%;
+		border: 2px solid #555555;
+		border-radius: 4px;
+		padding: 20px 20px;
+	}
+	h3 {
+		text-align:center;
+	}
+	
+	.tabcontent {
+		display: none;
+	}
+	.tablink {
+		background-color: SlateGrey;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 14px 5px;
+		font-size: 17px;
+		width: 33.333334%;
+	}
+	.tablink:hover{
+		background-color: #777;
+	}
+	form {
+		display:inline;
+	}
+	.inline {
+		display:inline;
+	}
+	.event-log {
+		overflow: auto;
+		max-height:90%;
+		background-color:SlateGrey;
+	}
+	.static-header {
+		height = 10vh;
+	}
+	
+</style>
+</head>
+<body>
+	<div class="outer">
+	<div class="top-left">
+		<h2 style="margin-left:25px">{{latest.date}}</h2>
+		<h1 style="text-align:center">{{latest.event_type}}</h1>
+		<p style="text-align:center">{{latest.scenario_text}}</p>
+		<p style="text-align:center">{{latest.status_change}}</p>
+		<p style="text-align:center">{{latest.bonus_scenario}}</p>
+		<h4 style="margin-left:50px">Name: {{char.name}}         HP:{{char.hp}} v</h4>
+		<p style="margin-left:50px">INT: {{char.int}} | PHY: {{char.phy}} </p>
+		<p style="margin-left:50px">CHR: {{char.chr}} | LUK: {{char.luk}} </p>
+		<p style="text-align:center">Friends:{{friends}}</p>
+	
+	</div>
+	<div class="top-right">
+		<div class="static-header">
+			<h3>Event Log</h3>
+		</div>
+		<div class="event-log">
+			{% for log in logs %}
+			<p>[{{log.date}}]{{log.event_type}}| {{log.status_change}}</p>
+				{% endfor %}
+		</div>
+	</div>
+	
+	<div class="bot-left">
+		
+		<div id="Training" class="tabcontent">
+			<h3>Action Tab</h3>
+			<form action="/{{char.id}}/action/study/" method="POST">
+			<button class="action-button">Study</button>
+			</form>
+			<form action="/{{char.id}}/action/workout/" method="POST">
+			<button class="action-button">Workout</button>
+			</form>
+			<form action="/{{char.id}}/action/act/" method="POST">
+			<button class="action-button">Act</button>
+			</form>
+			<form action="/{{char.id}}/action/pray" method="POST">
+			<button class="action-button">Pray</button>
+			</form>
+		</div>
+		
+		<div id="Rest" class="tabcontent">
+			<h3>Action Tab</h3>
+			<form action="/{{char.id}}/action/read" method="POST">
+			<button class="action-button">Read</button>
+			</form>
+			<form action="/{{char.id}}/action/yoga" method="POST">
+			<button class="action-button">Yoga</button>
+			</form>
+			<form action="/{{char.id}}/action/nothing" method="POST">
+			<button class="action-button">Nothing</button>
+			</form>
+			<form action="/{{char.id}}/action/sleep" method="POST">
+			<button class="action-button">Sleep</button>
+			</form>
+		</div>
+		
+		<div id="Friends" class="tabcontent">
+			<h3>Friends Tab (THIS TAB DOES NOT WORK)</h3>
+			<form action="/friend/study">
+			<button class="action-button">Study</button>
+			</form>
+			<form action="/friend/sports">
+			<button class="action-button">Sports</button>
+			</form>
+			<form action="/friend/chat">
+			<button class="action-button">Chat</button>
+			</form>
+			<form action="/action/outing">
+			<button class="action-button">Outing</button>
+			</form>
+		</div>
+		
+		<button class="tablink" onclick="openTab('Training', this)" id="defaultOpen">Training</button>
+		<button class="tablink" onclick="openTab('Rest', this)">Rest</button>
+		<button class="tablink" onclick="openTab('Friends', this)">Friends</button>
+	</div>
+	<div class="bot-right">
+		<div>
+			<h3>Event Calendar</h3>
+			<dl>
+				<dt><h4 class="inline">Year 1</h4>
+					{% if char.yr == 1 %}
+					<dd>[Sep] Introduction Ceremony</dd>
+					<dd>[Nov] Exam 1</dd>
+					<dd>[Dec] Exam 2</dd>
+					<dd>[Apr] Sports Day</dd>
+					<dd>[Jun] Final Exam </dd>
+					{% endif %}
+				</dt>
+				<dt><h4 class="inline">Year 2</h4>
+					{% if char.yr == 2 %}
+					<dd>[Nov] Exam 1</dd>
+					<dd>[Dec] Exam 2</dd>
+					<dd>[Apr] Sports Day</dd>
+					<dd>[Jun] Final Exam </dd>
+					<dd>[Jul] School Campout</dd>
+					{% endif %}
+				</dt>
+				<dt><h4 class="inline">Year 3</h4>
+					{% if char.yr == 3 %}
+					<dd>[Nov] Exam 1</dd>
+					<dd>[Dec] Exam 2</dd>
+					<dd>[Apr] Sports Day</dd>
+					<dd>[Jun] Prom Night</dd>
+					<dd>[Jun] Final Exam </dd>
+					{% endif %}
+				</dt>
+			</dl>
+		</div>
+	</div>
+	</div>
+	
+<script>
+	function openTab(actionType, elmnt){
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks= document.getElementsByClassName("tablink");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].style.backgroundColor = "";
+		}
+		document.getElementById(actionType).style.display = "block";
+		elmnt.style.backgroundColor = "White";
+	}
+	
+	document.getElementById("defaultOpen").click();
+</script>
+</body>
+</html>
